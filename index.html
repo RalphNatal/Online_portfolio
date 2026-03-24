@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative designer & developer portfolio. Explore my graphic design, UI/UX, and branding projects.">
+    <title>Portfolio | Creative Designer</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">
+                <span class="logo-accent">Online Portfolio</span>
+            </a>
+            
+            <!-- Hamburger Menu Toggle -->
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- Navigation Links -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#portfolio" class="nav-link">Portfolio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#services" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title animate-fade-up">
+                    Hi, I'm <span class="accent-text">Ralph Lluewyne Natal</span>
+                </h1>
+                <p class="hero-subtitle animate-fade-up-delay">
+                    Graphic Designer & Creative Thinker
+                </p>
+                <p class="hero-description animate-fade-up-delay-2">
+                    I create stunning visual designs and user experiences that bring brands to life
+                </p>
+                <div class="hero-buttons animate-fade-up-delay-3">
+                    <a href="#portfolio" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+            <div class="hero-visual animate-fade-up-delay-4">
+                <img src="Natal.png" alt="Ralph Lluewyne Natal" class="hero-profile-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title reveal-on-scroll">About Me</h2>
+            
+            <div class="about-content">
+                <div class="about-text reveal-on-scroll">
+                    <p>
+                        I’m a 3rd year BSIT student at the Technological University of the Philippines – Quezon City with a strong interest in graphic design and creative problem-solving. I’ve been exploring design for over 3 years, learning and improving my skills in areas like branding and UI/UX along the way.
+                    </p>
+                    <p>
+                        I specialize in translating ideas into visual concepts, working closely with clients to understand their vision and bringing it to life through innovative design solutions.
+                    </p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card reveal-on-scroll">
+                        <h3>Skills</h3>
+                        <ul class="skill-list">
+                            <li>Graphic Design</li>
+                            <li>UI/UX Design</li>
+                            <li>Web Design</li>
+                            <li>Illustration</li>
+                        </ul>
+                    </div>
+
+                    <div class="about-card reveal-on-scroll">
+                        <h3>Tools & Software</h3>
+                        <ul class="skill-list">
+                            <li>Figma</li>
+                            <li>Canva</li>
+                            <li>Willing to learn Photoshop</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title reveal-on-scroll">Featured Projects</h2>
+            
+            <div class="portfolio-grid">
+                <!-- Project Card 1: Mobile App UI -->
+                <div class="portfolio-card reveal-on-scroll">
+                    <div class="card-image">
+                        <img src="Screenshot 2026-03-24 144341.png" alt="GyroSteps Mobile App UI">
+                        <div class="card-overlay">
+                            <p>GyroSteps Mobile App</p>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>GyroSteps – Mobile App UI/UX</h3>
+                        <p>Capstone project UI design in Figma for a fall detection mobile application. Prototype includes user dashboard, real-time alerts, and caregiver notifications for elderly monitoring.</p>
+                    </div>
+                </div>
+
+                <!-- Project Card 3: Monitoring Dashboard -->
+                <div class="portfolio-card reveal-on-scroll">
+                    <div class="card-image">
+                        <img src="Screenshot 2026-03-24 144424.png" alt="Admin Dashboard">
+                        <div class="card-overlay">
+                            <p>Monitoring Dashboard</p>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>GyroSteps – Monitoring Dashboard</h3>
+                        <p>Prototype admin interface for caregivers and health providers. Real-time monitoring of user location, fall alerts, health metrics, and incident history with responsive design for desktop and tablet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title reveal-on-scroll">Designs I've Created</h2>
+            
+            <div class="portfolio-grid">
+                <!-- Design Card 1: T-Shirt Design -->
+                <div class="portfolio-card reveal-on-scroll">
+                    <div class="card-image">
+                        <img src="Tshirt Design.png" alt="T-Shirt Design">
+                        <div class="card-overlay">
+                            <p>School Batch Shirt</p>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>School batch T-Shirt Design</h3>
+                        <p>Creative and vibrant t-shirt design with unique graphics and typography.</p>
+                    </div>
+                </div>
+
+                <!-- Design Card 2: WON JI-AN -->
+                <div class="portfolio-card reveal-on-scroll">
+                    <div class="card-image">
+                        <img src="WON JI-AN.png" alt="WON JI-AN Design">
+                        <div class="card-overlay">
+                            <p>WON JI-AN Project</p>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Tshirt Design</h3>
+                        <p>Innovative design concept showcasing creative visual storytelling and brand identity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title reveal-on-scroll">My Services</h2>
+            
+            <div class="services-grid">
+                <!-- Service Card 1 -->
+                <div class="service-card reveal-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Branding Design</h3>
+                    <p>Complete branding solutions including logo design, color palettes, typography systems, and comprehensive brand guidelines.</p>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card reveal-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>UI/UX Design</h3>
+                    <p>User-centered design for web and mobile applications, focusing on intuitive interfaces and exceptional user experiences.</p>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card reveal-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-images"></i>
+                    </div>
+                    <h3>Social Media Graphics</h3>
+                    <p>Eye-catching visual content for social media platforms, including posts, banners, and marketing materials.</p>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="service-card reveal-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <h3>Illustration</h3>
+                    <p>Custom illustrations and vector graphics for branding, marketing, editorial design, and digital products.</p>
+                </div>
+
+                <!-- Service Card 5 -->
+                <div class="service-card reveal-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Web Design</h3>
+                    <p>Beautiful and functional website designs that combine aesthetics with usability and optimal performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title reveal-on-scroll">Get In Touch</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info reveal-on-scroll">
+                    <h3>Let's work together</h3>
+                    <p>Have a project in mind? I'd love to hear from you. Get in touch and let's create something amazing.</p>
+                    
+                    <div class="contact-details">
+                        <div class="detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <p class="detail-label">Email</p>
+                                <a href="mailto:natalralph71@gmail.com">natalralph71@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <p class="detail-label">Phone</p>
+                                <a href="tel:+639151650391">+63 9151650391</a>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <p class="detail-label">Location</p>
+                                <p>Antipolo Rizal, PH</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/ru_weyn/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/RalphNatal" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.facebook.com/ralph.natal.98/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 Ralph Natal. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Lightbox Modal -->
+    <div id="imageLightbox" class="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="lightboxImage" src="" alt="Full preview" class="lightbox-image">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
