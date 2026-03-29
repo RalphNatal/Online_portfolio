@@ -118,6 +118,81 @@
         </div>
     </section>
 
+    <!-- Gallery Section - Thumbnail Gallery Component -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title reveal-on-scroll">Design Portfolio Gallery</h2>
+            
+            <div class="gallery-container reveal-on-scroll">
+                <!-- Main Featured Image Display -->
+                <div class="gallery-main">
+                    <div class="main-image-wrapper">
+                        <img id="galleryMainImage" src="Screenshot 2026-03-24 144341.png" alt="GyroSteps Mobile App UI/UX" class="main-image">
+                        
+                        <!-- Navigation Arrows -->
+                        <button class="gallery-nav-btn gallery-prev" id="galleryPrev" aria-label="Previous image">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="gallery-nav-btn gallery-next" id="galleryNext" aria-label="Next image">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Image Information -->
+                    <div class="main-image-info">
+                        <h3 id="galleryMainTitle">GyroSteps – Mobile App UI/UX</h3>
+                        <p id="galleryMainDescription">Capstone project UI design in Figma for a fall detection mobile application. Prototype includes user dashboard, real-time alerts, and caregiver notifications for elderly monitoring.</p>
+                    </div>
+                </div>
+
+                <!-- Thumbnail Row -->
+                <div class="gallery-thumbnails-wrapper">
+                    <div class="gallery-thumbnails" id="galleryThumbnails">
+                        <!-- Thumbnail 1 -->
+                        <button class="thumbnail-item active" data-index="0" aria-label="GyroSteps Mobile App UI/UX" data-title="GyroSteps – Mobile App UI/UX" data-description="Capstone project UI design in Figma for a fall detection mobile application. Prototype includes user dashboard, real-time alerts, and caregiver notifications for elderly monitoring.">
+                            <img src="Screenshot 2026-03-24 144341.png" alt="GyroSteps Mobile App">
+                            <div class="thumbnail-overlay"></div>
+                        </button>
+
+                        <!-- Thumbnail 2 -->
+                        <button class="thumbnail-item" data-index="1" aria-label="GyroSteps Monitoring Dashboard" data-title="GyroSteps – Monitoring Dashboard" data-description="Prototype admin interface for caregivers and health providers. Real-time monitoring of user location, fall alerts, health metrics, and incident history with responsive design for desktop and tablet.">
+                            <img src="Screenshot 2026-03-24 144424.png" alt="Admin Dashboard">
+                            <div class="thumbnail-overlay"></div>
+                        </button>
+
+                        <!-- Thumbnail 3 -->
+                        <button class="thumbnail-item" data-index="2" aria-label="School batch T-Shirt Design" data-title="School batch T-Shirt Design" data-description="Creative and vibrant t-shirt design with unique graphics and typography, perfect for school events and commemoration.">
+                            <img src="Tshirt Design.png" alt="T-Shirt Design">
+                            <div class="thumbnail-overlay"></div>
+                        </button>
+
+                        <!-- Thumbnail 4 -->
+                        <button class="thumbnail-item" data-index="3" aria-label="WON JI-AN Tshirt Design" data-title="Tshirt Design - WON JI-AN" data-description="Innovative design concept showcasing creative visual storytelling and brand identity through typography and artistic composition.">
+                            <img src="WON JI-AN.png" alt="WON JI-AN Design">
+                            <div class="thumbnail-overlay"></div>
+                        </button>
+
+                         <button class="thumbnail-item" data-index="4" aria-label="Midnight Racing Tokyo" data-title="Midnight Racing Tokyo" data-description="Dynamic design concept for a high-energy racing event, featuring bold graphics and vibrant colors.">
+                            <img src="midnight racing tokyo.png" alt="Midnight Racing Tokyo">
+                            <div class="thumbnail-overlay"></div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Thumbnail Navigation Scroll Buttons (Mobile) -->
+                <div class="thumbnail-scroll-controls">
+                    <button class="thumbnail-scroll-btn thumbnail-scroll-left" id="thumbnailScrollLeft" aria-label="Scroll thumbnails left">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="thumbnail-scroll-btn thumbnail-scroll-right" id="thumbnailScrollRight" aria-label="Scroll thumbnails right">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="container">

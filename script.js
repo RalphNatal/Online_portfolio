@@ -511,6 +511,167 @@ function initImageLightbox() {
 }
 
 // ============================================
+// THUMBNAIL GALLERY
+// ============================================
+
+/**
+ * Initialize responsive thumbnail gallery
+ * Features: thumbnail clicks update main image, navigation arrows, 
+ * smooth transitions, accessible with ARIA labels
+ */
+function initGallery() {
+    const mainImage = document.getElementById('galleryMainImage');
+    const mainTitle = document.getElementById('galleryMainTitle');
+    const mainDescription = document.getElementById('galleryMainDescription');
+    const thumbnailButtons = document.querySelectorAll('.thumbnail-item');
+    const prevBtn = document.getElementById('galleryPrev');
+    const nextBtn = document.getElementById('galleryNext');
+    const thumbnailContainer = document.getElementById('galleryThumbnails');
+    const scrollLeftBtn = document.getElementById('thumbnailScrollLeft');
+    const scrollRightBtn = document.getElementById('thumbnailScrollRight');
+
+    if (!mainImage || !thumbnailButtons.length) return;
+
+    let currentIndex = 0;
+    const totalItems = thumbnailButtons.length;
+
+    /**
+     * Update gallery display with selected thumbnail
+     */
+    function updateGallery(index) {
+        // Validate index
+        index = Math.max(0, Math.min(index, totalItems - 1));
+        currentIndex = index;
+
+        // Get the selected thumbnail button
+        const selectedThumbnail = thumbnailButtons[index];
+        const selectedImage = selectedThumbnail.querySelector('img');
+        
+        // Update main image with fade effect
+        mainImage.style.opacity = '0.8';
+        setTimeout(() => {
+            mainImage.src = selectedImage.src;
+            mainImage.alt = selectedImage.alt;
+            mainImage.style.opacity = '1';
+        }, 150);
+
+        // Update title and description from data attributes
+        mainTitle.textContent = selectedThumbnail.getAttribute('data-title');
+        mainDescription.textContent = selectedThumbnail.getAttribute('data-description');
+
+        // Update active thumbnail visual indicator
+        thumbnailButtons.forEach((btn, i) => {
+            btn.classList.toggle('active', i === index);
+        });
+
+        // Scroll thumbnail into view on mobile
+        scrollThumbnailIntoView(selectedThumbnail);
+    }
+
+    /**
+     * Scroll thumbnail into view when selected
+     */
+    function scrollThumbnailIntoView(thumbnail) {
+        const container = thumbnailContainer;
+        const thumbRect = thumbnail.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        
+        // Check if thumbnail is outside visible area
+        if (thumbRect.left < containerRect.left) {
+            container.scrollLeft -= containerRect.left - thumbRect.left + 10;
+        } else if (thumbRect.right > containerRect.right) {
+            container.scrollLeft += thumbRect.right - containerRect.right + 10;
+        }
+    }
+
+    /**
+     * Navigation to next image
+     */
+    function nextImage() {
+        updateGallery((currentIndex + 1) % totalItems);
+    }
+
+    /**
+     * Navigation to previous image
+     */
+    function prevImage() {
+        updateGallery((currentIndex - 1 + totalItems) % totalItems);
+    }
+
+    /**
+     * Scroll thumbnails left (mobile)
+     */
+    function scrollThumbnailsLeft() {
+        thumbnailContainer.scrollBy({
+            left: -250,
+            behavior: 'smooth'
+        });
+    }
+
+    /**
+     * Scroll thumbnails right (mobile)
+     */
+    function scrollThumbnailsRight() {
+        thumbnailContainer.scrollBy({
+            left: 250,
+            behavior: 'smooth'
+        });
+    }
+
+    // Event listeners for main image navigation arrows
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevImage);
+    }
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextImage);
+    }
+
+    // Event listeners for thumbnail clicks
+    thumbnailButtons.forEach((thumbnail, index) => {
+        thumbnail.addEventListener('click', () => {
+            updateGallery(index);
+        });
+
+        // Keyboard accessibility - allow Enter/Space to select
+        thumbnail.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                updateGallery(index);
+            }
+        });
+    });
+
+    // Thumbnail scroll controls (mobile)
+    if (scrollLeftBtn) {
+        scrollLeftBtn.addEventListener('click', scrollThumbnailsLeft);
+    }
+    if (scrollRightBtn) {
+        scrollRightBtn.addEventListener('click', scrollThumbnailsRight);
+    }
+
+    // Keyboard navigation with arrow keys
+    document.addEventListener('keydown', (e) => {
+        // Only apply when gallery section is in focus/visible
+        const gallerySection = document.getElementById('gallery');
+        if (!gallerySection || !isInViewport(gallerySection)) return;
+
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            prevImage();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            nextImage();
+        }
+    });
+
+    // Initialize gallery with first image
+    updateGallery(0);
+
+    // Smooth fade transition for main image
+    mainImage.style.transition = 'opacity 300ms ease-in-out';
+}
+
+// ============================================
 // CAROUSEL / IMAGE SLIDER
 // ============================================
 
@@ -639,6 +800,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initActiveNavLink();
     initFormValidation();
     initImageLightbox();
+    initGallery();
     initCarousel();
     
     // Optional animations (comment out if not needed)
