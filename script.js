@@ -516,8 +516,13 @@ function initImageLightbox() {
 
 /**
  * Initialize responsive thumbnail gallery
- * Features: thumbnail clicks update main image, navigation arrows, 
- * smooth transitions, accessible with ARIA labels
+ * Features: 
+ * - Thumbnail clicks update main image using data-index attributes
+ * - Navigation arrows cycle through images
+ * - Smooth fade transitions
+ * - Accessible with ARIA labels
+ * - Keyboard support (Enter/Space to select, Arrow keys to navigate)
+ * - Auto-scrolls selected thumbnail into view
  */
 function initGallery() {
     const mainImage = document.getElementById('galleryMainImage');
@@ -530,16 +535,50 @@ function initGallery() {
     const scrollLeftBtn = document.getElementById('thumbnailScrollLeft');
     const scrollRightBtn = document.getElementById('thumbnailScrollRight');
 
-    if (!mainImage || !thumbnailButtons.length) return;
+    // Guard clause: exit if critical elements missing
+    if (!mainImage || !thumbnailButtons.length) {
+        console.warn('Gallery: Required elements not found');
+        return;
+    }
 
     let currentIndex = 0;
     const totalItems = thumbnailButtons.length;
 
     /**
-     * Update gallery display with selected thumbnail
+     * Validate that all thumbnails have unique data-index values
+     * Used for debugging and ensuring proper indexing
+     */
+    function validateGalleryIndexing() {
+        const indexes = new Set();
+        let hasErrors = false;
+        
+        thumbnailButtons.forEach((btn, domIndex) => {
+            const dataIndex = btn.getAttribute('data-index');
+            
+            if (!dataIndex) {
+                console.error(`Thumbnail at DOM index ${domIndex} missing data-index attribute`);
+                hasErrors = true;
+            } else if (indexes.has(dataIndex)) {
+                console.error(`Duplicate data-index="${dataIndex}" found at DOM index ${domIndex}`);
+                hasErrors = true;
+            } else {
+                indexes.add(dataIndex);
+            }
+        });
+        
+        if (!hasErrors) {
+            console.log(`Gallery indexing validated: ${totalItems} unique items`);
+        }
+        
+        return !hasErrors;
+    }
+
+    /**
+     * Update gallery display with selected thumbnail by DOM index
+     * @param {number} index - DOM position of thumbnail (0-based)
      */
     function updateGallery(index) {
-        // Validate index
+        // Validate and constrain index
         index = Math.max(0, Math.min(index, totalItems - 1));
         currentIndex = index;
 
@@ -547,78 +586,103 @@ function initGallery() {
         const selectedThumbnail = thumbnailButtons[index];
         const selectedImage = selectedThumbnail.querySelector('img');
         
-        // Update main image with fade effect
+        // Guard: ensure image exists
+        if (!selectedImage) {
+            console.error(`No image found in thumbnail at index ${index}`);
+            return;
+        }
+
+        // Update main image with smooth fade effect
         mainImage.style.opacity = '0.8';
         setTimeout(() => {
             mainImage.src = selectedImage.src;
             mainImage.alt = selectedImage.alt;
             mainImage.style.opacity = '1';
+            
+            // Log for debugging
+            console.log(`Gallery updated: index=${index}, src=${selectedImage.src}`);
         }, 150);
 
         // Update title and description from data attributes
-        mainTitle.textContent = selectedThumbnail.getAttribute('data-title');
-        mainDescription.textContent = selectedThumbnail.getAttribute('data-description');
+        const title = selectedThumbnail.getAttribute('data-title') || 'Untitled Project';
+        const description = selectedThumbnail.getAttribute('data-description') || 'No description available';
+        
+        mainTitle.textContent = title;
+        mainDescription.textContent = description;
 
-        // Update active thumbnail visual indicator
+        // Update active thumbnail visual indicator (only one .active at a time)
         thumbnailButtons.forEach((btn, i) => {
             btn.classList.toggle('active', i === index);
         });
 
-        // Scroll thumbnail into view on mobile
+        // Auto-scroll selected thumbnail into view on mobile/small screens
         scrollThumbnailIntoView(selectedThumbnail);
     }
 
     /**
-     * Scroll thumbnail into view when selected
+     * Scroll thumbnail into view when selected (for overflow scenarios)
+     * Ensures selected thumbnail is visible in the container
      */
     function scrollThumbnailIntoView(thumbnail) {
+        if (!thumbnailContainer) return;
+        
         const container = thumbnailContainer;
         const thumbRect = thumbnail.getBoundingClientRect();
         const containerRect = container.getBoundingClientRect();
         
         // Check if thumbnail is outside visible area
         if (thumbRect.left < containerRect.left) {
+            // Scroll left to show thumbnail
             container.scrollLeft -= containerRect.left - thumbRect.left + 10;
         } else if (thumbRect.right > containerRect.right) {
+            // Scroll right to show thumbnail
             container.scrollLeft += thumbRect.right - containerRect.right + 10;
         }
     }
 
     /**
-     * Navigation to next image
+     * Navigation to next image (wraps to first item)
      */
     function nextImage() {
-        updateGallery((currentIndex + 1) % totalItems);
+        const nextIndex = (currentIndex + 1) % totalItems;
+        updateGallery(nextIndex);
     }
 
     /**
-     * Navigation to previous image
+     * Navigation to previous image (wraps to last item)
      */
     function prevImage() {
-        updateGallery((currentIndex - 1 + totalItems) % totalItems);
+        const prevIndex = (currentIndex - 1 + totalItems) % totalItems;
+        updateGallery(prevIndex);
     }
 
     /**
-     * Scroll thumbnails left (mobile)
+     * Scroll thumbnails container left (mobile controls)
      */
     function scrollThumbnailsLeft() {
-        thumbnailContainer.scrollBy({
-            left: -250,
-            behavior: 'smooth'
-        });
+        if (thumbnailContainer) {
+            thumbnailContainer.scrollBy({
+                left: -250,
+                behavior: 'smooth'
+            });
+        }
     }
 
     /**
-     * Scroll thumbnails right (mobile)
+     * Scroll thumbnails container right (mobile controls)
      */
     function scrollThumbnailsRight() {
-        thumbnailContainer.scrollBy({
-            left: 250,
-            behavior: 'smooth'
-        });
+        if (thumbnailContainer) {
+            thumbnailContainer.scrollBy({
+                left: 250,
+                behavior: 'smooth'
+            });
+        }
     }
 
-    // Event listeners for main image navigation arrows
+    // ========== EVENT LISTENERS ==========
+
+    // Main image navigation arrows
     if (prevBtn) {
         prevBtn.addEventListener('click', prevImage);
     }
@@ -626,17 +690,42 @@ function initGallery() {
         nextBtn.addEventListener('click', nextImage);
     }
 
-    // Event listeners for thumbnail clicks
+    // Keyboard navigation for arrows (when main image has focus)
+    mainImage.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            prevImage();
+        } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            nextImage();
+        }
+    });
+
+    // Thumbnail click and keyboard interaction
     thumbnailButtons.forEach((thumbnail, index) => {
+        // Make thumbnail keyboard accessible
+        if (!thumbnail.hasAttribute('tabindex')) {
+            thumbnail.setAttribute('tabindex', '0');
+        }
+
+        // Click to select thumbnail
         thumbnail.addEventListener('click', () => {
             updateGallery(index);
         });
 
         // Keyboard accessibility - allow Enter/Space to select
-        thumbnail.addEventListener('keypress', (e) => {
+        thumbnail.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 updateGallery(index);
+            }
+            // Allow arrow keys to navigate between thumbnails
+            else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevImage();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextImage();
             }
         });
     });
@@ -649,26 +738,9 @@ function initGallery() {
         scrollRightBtn.addEventListener('click', scrollThumbnailsRight);
     }
 
-    // Keyboard navigation with arrow keys
-    document.addEventListener('keydown', (e) => {
-        // Only apply when gallery section is in focus/visible
-        const gallerySection = document.getElementById('gallery');
-        if (!gallerySection || !isInViewport(gallerySection)) return;
-
-        if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            prevImage();
-        } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            nextImage();
-        }
-    });
-
-    // Initialize gallery with first image
+    // Initialize gallery with first item and validate indexing
+    validateGalleryIndexing();
     updateGallery(0);
-
-    // Smooth fade transition for main image
-    mainImage.style.transition = 'opacity 300ms ease-in-out';
 }
 
 // ============================================

@@ -779,7 +779,8 @@ body.dark-mode .navbar {
     display: block;
     padding: var(--spacing-lg);
     background: linear-gradient(135deg, var(--background-light), var(--background-white));
-    transition: transform var(--transition-base);
+    transition: transform var(--transition-base), opacity var(--transition-base);
+    opacity: 1;
 }
 
 .main-image-wrapper:hover .main-image {
@@ -850,14 +851,17 @@ body.dark-mode .navbar {
 .gallery-thumbnails-wrapper {
     position: relative;
     width: 100%;
+    overflow: hidden;
 }
 
 .gallery-thumbnails {
     display: flex;
     gap: var(--spacing-md);
     overflow-x: auto;
+    overflow-y: hidden;
     padding: var(--spacing-sm) 0;
     scroll-behavior: smooth;
+    flex-wrap: nowrap;
     /* Hide scrollbar but allow scrolling */
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -885,11 +889,17 @@ body.dark-mode .navbar {
     justify-content: center;
 }
 
+.thumbnail-item:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
 .thumbnail-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform var(--transition-base);
+    display: block;
 }
 
 .thumbnail-overlay {
@@ -903,7 +913,7 @@ body.dark-mode .navbar {
     transition: opacity var(--transition-base);
 }
 
-/* Active Thumbnail Styling */
+/* Active Thumbnail Styling - Highlighted when selected */
 .thumbnail-item.active {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px var(--background-white), 0 0 15px rgba(74, 144, 226, 0.5);
@@ -914,11 +924,19 @@ body.dark-mode .navbar {
     opacity: 1;
 }
 
+.thumbnail-item.active img {
+    filter: brightness(1.1);
+}
+
 /* Thumbnail Hover State */
 .thumbnail-item:hover {
     border-color: var(--primary-light);
     transform: scale(1.08);
     box-shadow: var(--shadow-md);
+}
+
+.thumbnail-item:hover .thumbnail-overlay {
+    opacity: 0.5;
 }
 
 .thumbnail-item:hover img {
@@ -1015,6 +1033,13 @@ body.dark-mode .navbar {
 
     .gallery-thumbnails-wrapper {
         margin-bottom: var(--spacing-lg);
+        overflow: hidden;
+    }
+
+    .gallery-thumbnails {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
 }
 
@@ -1048,6 +1073,9 @@ body.dark-mode .navbar {
 
     .gallery-thumbnails {
         gap: var(--spacing-xs);
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
 }
 
