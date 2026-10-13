@@ -37,8 +37,8 @@ const PROJECTS = [
         client: 'CALLED Presentations',
         category: ['Mobile', 'Client work'],
         featured: true,
-        status: '', // TODO(Ralph): e.g. "Live on Google Play · iOS coming soon"
-        year: '', // TODO(Ralph)
+        status: 'Live on Google Play & also under review on the App Store', // TODO(Ralph): add iOS App Store status once live
+        year: '2026', // TODO(Ralph)
         role: 'Developer',
         summary: 'A Flutter GPS devotional walking app: users go on prayer walks while the app tracks their route and delivers scripture along the way.',
         overview: 'Prayer Walk is a GPS devotional walking app built for CALLED Presentations. Users head out on a prayer walk while the app tracks their route and steps and delivers scripture along the way, read aloud with text-to-speech. The project started in React Native / Expo and was migrated to Flutter, then shipped to the Google Play Store production track under the client\'s organization account and taken through iOS App Store submission.',
@@ -61,10 +61,10 @@ const PROJECTS = [
         links: {
             live: '',
             repo: '',
-            playStore: '', // TODO(Ralph): public Google Play listing URL
+            playStore: 'https://play.google.com/store/apps/details?id=com.calledpresentations.prayer_walk', // TODO(Ralph): public Google Play listing URL
             appStore: '', // TODO(Ralph): public App Store listing URL (once live)
         },
-        cover: '', // TODO(Ralph): add assets/projects/prayer-walk/cover.webp, then set this path
+        cover: '/assets/projects/prayer-walk/app icon google.png', // TODO(Ralph): add assets/projects/prayer-walk/cover.webp, then set this path
         images: [],
         accent: '#0F766E',
     },
@@ -74,8 +74,8 @@ const PROJECTS = [
         client: 'Dr. Richard T. Mamiya Theatre, Honolulu',
         category: ['Web', 'Client work'],
         featured: true,
-        status: '', // TODO(Ralph): e.g. "Live" / "In development"
-        year: '', // TODO(Ralph)
+        status: 'Live on the internet', // TODO(Ralph): add iOS App Store status once live
+        year: '2026', // TODO(Ralph)
         role: 'Developer',
         summary: 'A full online ticketing system: pick a showtime, choose seats on an interactive map, pay, and receive a QR e-ticket by email.',
         overview: 'An end-to-end online ticketing system for the Dr. Richard T. Mamiya Theatre in Honolulu. Guests pick a showtime, choose seats on an interactive map of the real 503-seat house, pay with Stripe or PayPal, and receive a QR e-ticket by email. Payments and email run through Supabase Edge Functions, and amounts are always recomputed on the server.',
@@ -95,7 +95,7 @@ const PROJECTS = [
         ],
         stack: ['React Native Web', 'webpack', 'TypeScript', 'Supabase', 'Postgres', 'Edge Functions', 'Stripe', 'PayPal', 'Resend', 'Vercel'],
         links: {
-            live: '', // TODO(Ralph): public site URL
+            live: 'https://mamiyatheater.calledpresentations.com/', // TODO(Ralph): public site URL
             repo: '', // TODO(Ralph): only if the repo is public
             playStore: '',
             appStore: '',
@@ -138,7 +138,7 @@ const PROJECTS = [
         category: ['Mobile', 'Web'],
         featured: false,
         status: 'In development',
-        year: '', // TODO(Ralph)
+        year: '2026', // TODO(Ralph)
         role: 'Admin / TNVS operator dashboard (Flutter web + Firebase)',
         summary: 'An IoT smart-helmet system for TNVS riders. I built the admin / operator dashboard.',
         overview: 'NovaRide is a capstone team project at TIP-QC: an IoT smart-helmet system for TNVS riders. My part is the admin / TNVS operator dashboard, built as a Flutter web app on Firebase (Cloud Firestore).',
