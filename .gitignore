@@ -1,0 +1,7 @@
+# Full-size source images (re-generate WebP with tools/optimize-images.cjs)
+assets/originals/
+
+# Local tooling
+node_modules/
+package-lock.json
+.lighthouse/
